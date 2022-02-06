@@ -216,7 +216,7 @@ Static Function GetCSS( nCor, cImg )
 			cCor2 := "#0f9cbf"
 			cCor3 := "#3badca"
 			cCor4 := "#148aa8"
-			cArow := "GEOARROWDPW.PNG"
+			cArow := "FWX_ARROWDSW.PNG"
 			
 		Case ( nCor == 2 ) // Vermelho
 		
@@ -226,7 +226,7 @@ Static Function GetCSS( nCor, cImg )
 			cCor2 := "#bf0f15"
 			cCor3 := "#c8393e"
 			cCor4 := "#a71318"
-			cArow := "GEOARROWDPW.PNG"
+			cArow := "FWX_ARROWDSW.PNG"
 			
 		OtherWise // Cinza
 		
@@ -236,7 +236,7 @@ Static Function GetCSS( nCor, cImg )
 			cCor2 := "#e7e7e7"
 			cCor3 := "#fcfcfc"
 			cCor4 := "#c8cbcc"
-			cArow := "GEOARROWDP.PNG"
+			cArow := "FWX_ARROWDSB.PNG"
 	
 	EndCase
 	
