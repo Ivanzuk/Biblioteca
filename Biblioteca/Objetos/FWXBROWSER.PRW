@@ -308,6 +308,7 @@ METHOD Activate() CLASS FWXBROWSER
     ::oBrowse:Activate()
 
     ::oBrowse:oBrowse:bRClicked := ::bRigCli
+    ::oBrowse:oBrowse:bKeyBlock := {|oGrid,cKey| KeyBlock( SELF:oBrowse, cKey ) } 
 
     ::lActive := .T.
 
@@ -411,3 +412,65 @@ Static Function GetColumn( bVar, cTit, cTip, nTam, nDec, cPic, nAlg, bHed )
 	EndIf
 
 Return ( oCol )
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+/*/{Protheus.doc} KeyBlock
+Função que recebe as teclar digitadas no browse.
+
+@author Ivan Haponczuk
+@since 17/02/2022
+@version 1.0
+
+@param oBrw, object, Objeto do browse.
+@param cKey, character, Código da tecla apertada.
+
+@return nil
+/*/
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+Static Function KeyBlock( oBrw, cKey )
+
+    If ( oBrw:At() <= 0 )
+        Return Nil
+    EndIf
+
+    Do Case
+        
+        Case ( cKey == 3 )
+
+            CopytoClipboard( All2Str( Eval( oBrw:aColumns[oBrw:ColPos()]:bData ) ) )
+
+    EndCase
+
+Return Nil
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+/*/{Protheus.doc} All2Str
+Converte qualquer tipo de variável para texto.
+
+@author Ivan Haponczuk
+@since 18/06/2020
+@version 1.0
+
+@param xVar, undefined, Varável a ser convertida para texto.
+
+@return character, Retorna a variável convertida para texto.
+/*/
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+Static Function All2Str( xVar )
+
+	Local cRet := ""
+	
+	Do Case
+		Case ValType( xVar ) == "C"
+			cRet := xVar
+		Case ValType( xVar ) == "N"
+			cRet := StrTran( AllTrim( Str( xVar ) ), ".", "," )
+		Case ValType( xVar ) == "D"
+			cRet := DTOS( xVar )
+		Case ValType( xVar ) == "L"
+			cRet := If( xVar, ".T.", ".F." )
+		OtherWise
+			cRet := "ERRO"
+	EndCase
+
+Return AllTrim( cRet )
